@@ -1,0 +1,11 @@
+# for API
+fastapi[all]==0.95.1
+
+# for typing and environment variables
+pydantic[dotenv]==1.10.7
+
+# libraries for database communication:
+sqlalchemy==2.0.12
+alembic==1.10.4
+# postgres:
+psycopg2-binary==2.9.6
