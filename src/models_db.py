@@ -8,11 +8,17 @@ Base: Type[Any] = declarative_base()
 
 
 class Currency(Base):
+    """
+    Currency model to store the name and code of a currency.
+    ISO 4217 standard is used for the currency name and code.
+    """
+
     __tablename__ = "currencies"
 
     id = Column(Integer, primary_key=True)
     name = Column(String(50), nullable=False, unique=True)  # e.g. Dollar, Euro, Pound
     code = Column(String(10), nullable=False, unique=True)  # e.g. USD, EUR, GBP
+    num = Column(Integer, nullable=False, unique=True)  # e.g. 840, 978, 826 (ISO 4217 numeric code)
 
     stocks = relationship("Stock", back_populates="currency")
     cross_currency_sources = relationship(
@@ -23,7 +29,7 @@ class Currency(Base):
     )
 
     def __repr__(self):
-        return f"<Currency(name={self.name})>"
+        return f"<Currency(name={self.name}, code={self.code})>"
 
 
 class Stock(Base):
@@ -31,7 +37,7 @@ class Stock(Base):
 
     id = Column(Integer, primary_key=True)
     currency_id = Column(Integer, ForeignKey("currencies.id"), nullable=False)
-    stock_price = Column(Float, nullable=False)
+    stock_price = Column(Float, nullable=False)  # Price of the stock in the specified currency
     date_of_price = Column(DateTime, nullable=False, default=datetime.now(timezone.utc))
     created_at = Column(DateTime, default=datetime.now(timezone.utc))
     updated_at = Column(

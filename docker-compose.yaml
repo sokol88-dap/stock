@@ -1,0 +1,13 @@
+version: "3.3"
+
+services:
+  db:
+    image: postgres:${DB_VERSION:-14.9}
+    restart: unless-stopped
+    command: -c synchronous_commit=off
+    environment:
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-postgres}
+      POSTGRES_USER: ${DB_USER:-postgres}
+      POSTGRES_DB: ${DB_DB:-stocks}
+    ports:
+      - 5432:5432

@@ -11,6 +11,11 @@ This module will get communicate with data base which will be storage needed sto
 > python -m pip install -r setup/requirements_dev.txt
 ```
 
+# External services
+
+> docker-compose -f docker-compose.yaml up -d
+> docker-compose -f docker-compose.yaml down
+
 # Running API in local
 
 ```
